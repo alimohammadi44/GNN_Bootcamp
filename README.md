@@ -42,17 +42,17 @@ each input graph represents an entire molecule, and the model must predict a sin
 To handle this, the following model is used:
 
 
-'pyg_nn.GINConv(
+`pyg_nn.GINConv(
     nn.Sequential(
         nn.Linear(hidden_dim, hidden_dim),
         nn.ReLU(),
         nn.Linear(hidden_dim, hidden_dim)
     )
-)'
+)`
 
 
 
-##Why GIN?
+## Why GIN?
 
 Graph Isomorphism Network (GIN) is designed to be maximally expressive
 
@@ -74,13 +74,13 @@ Aggregate them using global pooling
 
 Produce a single graph embedding
 
-Pros of GIN (MUTAG)
+## Pros of GIN (MUTAG)
 
 ✅ Very expressive
 ✅ Strong at capturing subtle structural differences
 ✅ Well-suited for molecular data
 
-Cons of GIN
+## Cons of GIN
 
 ❌ More parameters
 ❌ Higher risk of overfitting on small datasets
@@ -100,7 +100,7 @@ self.conv2 = GCNConv(hidden_channels, dataset.num_classes)
 
 Graph Convolutional Networks (GCN) perform neighborhood averaging with normalized adjacency.
 
-Pros
+## Pros
 
 Simple and efficient
 
@@ -108,7 +108,7 @@ Strong baseline for citation networks
 
 Easy to train
 
-Cons
+## Cons
 
 Uniformly weights neighbors
 
