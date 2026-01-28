@@ -91,50 +91,48 @@ Each node (paper) must be classified, not the entire graph.
 Two architectures are explored.
 
 🟦 GCN on Cora
+```python
 self.conv1 = GCNConv(dataset.num_features, hidden_channels)
 self.conv2 = GCNConv(hidden_channels, dataset.num_classes)
+```
 
 
 Graph Convolutional Networks (GCN) perform neighborhood averaging with normalized adjacency.
 
-## Pros
+## Pros of GCN (MUTAG)
 
-Simple and efficient
+✅ Simple and efficient
+✅ Strong baseline for citation networks
+✅ Easy to train
 
-Strong baseline for citation networks
+## Cons of GCN
 
-Easy to train
+❌ Uniformly weights neighbors
+❌ Limited expressive power
+❌ Can oversmooth with deeper layers
 
-## Cons
 
-Uniformly weights neighbors
-
-Limited expressive power
-
-Can oversmooth with deeper layers
-
-🟨 GAT on Cora
+# 🟨 GAT on Cora
+```python
 self.conv1 = GATConv(dataset.num_features, hidden_channels, heads)
 self.conv2 = GATConv(heads * hidden_channels, dataset.num_classes, heads)
+```
 
 
 Graph Attention Networks (GAT) introduce attention weights to learn which neighbors matter more.
 
-Pros
+## Pros of GAT (MUTAG)
 
-Learns adaptive neighbor importance
+✅ Learns adaptive neighbor importance
+✅ More expressive than GCN
+✅ Often improves performance on heterophilic graphs
 
-More expressive than GCN
+## Cons of GAT
 
-Often improves performance on heterophilic graphs
+❌ More computationally expensive
+❌ More hyperparameters (heads, attention)
+❌ Slower on large graphs
 
-Cons
-
-More computationally expensive
-
-More hyperparameters (heads, attention)
-
-Slower on large graphs
 
 🧠 Key Differences (Summary)
 Aspect	MUTAG (GIN)	Cora (GCN / GAT)
@@ -153,9 +151,6 @@ Cora focuses on scalable node classification, where simpler architectures like G
 Using multiple models on Cora highlights the trade-off between simplicity (GCN) and expressiveness (GAT)
 
 Together, these experiments demonstrate how task type and data structure drive GNN architecture design.
-
-
->>>>>>> ce795850bb6ffc7d8c10ff003a7202093ae47c87
 
 - `GNN_MUTAG.py` / `GNN_MUTAG.ipynb`  
   Graph Isomorphism Network (GIN) model for graph-level classification on the MUTAG dataset.
