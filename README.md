@@ -8,5 +8,8 @@ Generated files are not tracked in the repository.
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
 (https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GCN_Cora.ipynb)
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
+(https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GNN_MUTAG.ipynb)
+
 
 
