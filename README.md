@@ -40,7 +40,8 @@ For the MUTAG dataset, the task is graph-level classification:
 each input graph represents an entire molecule, and the model must predict a single label for the whole graph.
 
 To handle this, the following model is used:
-
+گگ
+گگ
 pyg_nn.GINConv(
     nn.Sequential(
         nn.Linear(hidden_dim, hidden_dim),
