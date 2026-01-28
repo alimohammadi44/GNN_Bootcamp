@@ -41,7 +41,7 @@ each input graph represents an entire molecule, and the model must predict a sin
 
 To handle this, the following model is used:
 
-'''
+'''python
 pyg_nn.GINConv(
     nn.Sequential(
         nn.Linear(hidden_dim, hidden_dim),
