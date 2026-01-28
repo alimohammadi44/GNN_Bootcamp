@@ -3,9 +3,6 @@
 This repository contains hands-on implementations of **Graph Neural Networks (GNNs)** using **PyTorch Geometric (PyG)**.
 It is designed for learning, experimentation, and teaching core GNN concepts through well-known benchmark datasets.
 
-# GNN_Bootcamp
-Hands-on bootcamp materials for Graph Neural Networks (GNNs), including tutorials, exercises, and projects.
-
 ## Data
 Datasets are downloaded and processed automatically using PyTorch Geometric / OGB.
 Generated files are not tracked in the repository.
