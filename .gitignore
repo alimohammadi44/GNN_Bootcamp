@@ -179,3 +179,27 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+
+# =========================
+# Machine Learning / GNN
+# =========================
+
+# PyTorch / model files
+*.pt
+*.pth
+*.ckpt
+
+# Datasets (generated or downloaded)
+data/
+dataset/
+datasets/
+
+# PyTorch Geometric / OGB
+processed/
+raw/
+
+# Large artifacts
+*.npz
+*.npy
+*.pkl
