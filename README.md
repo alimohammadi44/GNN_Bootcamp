@@ -17,7 +17,7 @@ Generated files are not tracked in the repository.
 (https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GNN_MUTAG.ipynb)
 
 
-
+# Projects:
 
 The project focuses on two complementary tasks:
 - **Node-level classification** on citation networks
@@ -41,18 +41,18 @@ each input graph represents an entire molecule, and the model must predict a sin
 
 To handle this, the following model is used:
 
-'''python
-pyg_nn.GINConv(
+
+'pyg_nn.GINConv(
     nn.Sequential(
         nn.Linear(hidden_dim, hidden_dim),
         nn.ReLU(),
         nn.Linear(hidden_dim, hidden_dim)
     )
-)
+)'
 
 
 
-Why GIN?
+##Why GIN?
 
 Graph Isomorphism Network (GIN) is designed to be maximally expressive
 
