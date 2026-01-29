@@ -24,10 +24,10 @@ The project focuses on two complementary tasks:
 
 ## 📁 Contents
 
-- `GCN_Cora.py` / `GCN_Cora.ipynb`  
-  Graph Convolutional Network (GCN) and Graph Attention Network (GAT) models for node classification on the Cora dataset.
-=======
-🔍 Model Comparison: MUTAG vs Cora
+-
+-- Cora : Graph Convolutional Network (GCN) and Graph Attention Network (GAT) models for node classification on the Cora dataset.
+-- MUTAG: Graph Isomorphism Network (GIN) on molecular graphs on MUTAG dataset.
+
 
 Although both experiments use Graph Neural Networks, the nature of the tasks and data is fundamentally different, which motivates different model choices.
 
