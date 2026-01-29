@@ -24,7 +24,7 @@ The project focuses on two complementary tasks:
 
 ## 📁 Contents
 
-### Cora : Graph Convolutional Network (GCN) and Graph Attention Network (GAT) models for node classification on the Cora dataset.
+### Cora : Graph Convolutional Network (GCN) and Graph Attention Network (GAT) models on the Cora dataset.
 ### MUTAG: Graph Isomorphism Network (GIN) on molecular graphs on MUTAG dataset.
 
 
