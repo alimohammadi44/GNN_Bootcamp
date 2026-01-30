@@ -175,4 +175,4 @@ python GNN_MUTAG.py
 
 - Veličković et al. — Graph Attention Networks (https://arxiv.org/abs/1710.10903)
 
-- Xu et al. — How Powerful Are Graph Neural Networks?
+- Xu et al. — How Powerful Are Graph Neural Networks? (https://arxiv.org/abs/1810.00826)
