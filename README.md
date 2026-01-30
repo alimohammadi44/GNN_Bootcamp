@@ -171,8 +171,8 @@ python GNN_MUTAG.py
 
 # 📜 References
 
-- Kipf & Welling — Semi-Supervised Classification with Graph Convolutional Networks
+- Kipf & Welling — Semi-Supervised Classification with Graph Convolutional Networks (https://arxiv.org/abs/1609.02907)
 
-- Veličković et al. — Graph Attention Networks
+- Veličković et al. — Graph Attention Networks (https://arxiv.org/abs/1710.10903)
 
 - Xu et al. — How Powerful Are Graph Neural Networks?
