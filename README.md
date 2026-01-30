@@ -50,7 +50,7 @@ Because the graph is large and fixed, **scalability and efficient message passin
 
 ---
 
-## 🧪 Graph-Level Classification on MUTAG — GIN
+# 🧪 Graph-Level Classification on MUTAG — GIN
 
 ### Model
 ```python
@@ -96,7 +96,7 @@ Pros and Cons of GIN (MUTAG)
 
 ❌ Computationally heavier
 
-📚 Node-Level Classification on Cora — GCN and GAT
+# 📚 Node-Level Classification on Cora — GCN and GAT
 Graph Convolutional Network (GCN)
 ```python
 self.conv1 = GCNConv(dataset.num_features, hidden_channels)
@@ -145,14 +145,14 @@ GAT introduces attention mechanisms that learn which neighbors are more importan
 
 ❌ Slower on large graphs
 
-🔍 MUTAG vs Cora — Key Differences
+## 🔍 MUTAG vs Cora — Key Differences
 Aspect	MUTAG (GIN)	Cora (GCN / GAT)
 Task type	Graph-level	Node-level
 Input	Many small graphs	One large graph
 Dataset nature	Molecular structures	Citation network
 Model focus	Structural expressiveness	Efficient message passing
 Main risk	Overfitting	Oversmoothing (GCN)
-🧠 Key Takeaways
+## 🧠 Key Takeaways
 
 Graph-level classification requires highly expressive models → GIN
 
@@ -163,11 +163,13 @@ GAT trades efficiency for expressiveness compared to GCN
 GNN architecture should be chosen based on task and dataset characteristics, not popularity
 
 🚀 Running the Code
+```python
 pip install torch torch-geometric
 python GCN_Cora.py
 python GNN_MUTAG.py
+```
 
-📜 References
+# 📜 References
 
 -- Kipf & Welling — Semi-Supervised Classification with Graph Convolutional Networks
 
