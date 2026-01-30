@@ -1,21 +1,7 @@
-# GNN Bootcamp
-
-This repository contains hands-on implementations of **Graph Neural Networks (GNNs)** using **PyTorch Geometric (PyG)**.
-It is designed for learning, experimentation, and teaching core GNN concepts through well-known benchmark datasets.
-
-## Data
-Datasets are downloaded and processed automatically using PyTorch Geometric / OGB.
-Generated files are not tracked in the repository.
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
-(https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GCN_Cora.ipynb)
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
-(https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GNN_MUTAG.ipynb)
-
-# 🧠 GNN Bootcamp — From Nodes to Graphs
+# GNN Bootcamp — From Nodes to Graphs
 
 This repository is a **hands-on Graph Neural Networks (GNN) bootcamp** that demonstrates how **task type and dataset structure determine the choice of GNN architecture**.
+It is designed for learning, experimentation, and teaching core GNN concepts through well-known benchmark datasets using **PyTorch Geometric (PyG)**.
 
 The bootcamp focuses on two complementary problems in graph machine learning:
 - **Graph-level classification** on molecular graphs (MUTAG)
@@ -25,7 +11,17 @@ Although both tasks rely on message passing, their **objectives, data characteri
 
 ---
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
+(https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GCN_Cora.ipynb)
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
+(https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GNN_MUTAG.ipynb)
+
+
+
 ## 📊 Dataset Nature
+Datasets are downloaded and processed automatically using PyTorch Geometric / OGB.
+Generated files are not tracked in the repository.
 
 ### MUTAG
 MUTAG consists of **many small molecular graphs**, where:
