@@ -13,6 +13,62 @@ Generated files are not tracked in the repository.
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
 (https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GNN_MUTAG.ipynb)
 
+# 🧠 GNN Bootcamp — From Nodes to Graphs
+
+This repository is a **hands-on Graph Neural Networks (GNN) bootcamp** that demonstrates how **task type and dataset structure determine the choice of GNN architecture**.
+
+The bootcamp focuses on two complementary problems in graph machine learning:
+- **Graph-level classification** on molecular graphs (MUTAG)
+- **Node-level classification** on citation networks (Cora)
+
+Although both tasks rely on message passing, their **objectives, data characteristics, and modeling requirements are fundamentally different**, motivating different GNN designs.
+
+---
+
+## 📊 Dataset Nature
+
+### MUTAG
+MUTAG consists of **many small molecular graphs**, where:
+- Each graph represents a chemical compound
+- Nodes correspond to atoms and edges to chemical bonds
+- Each graph has a single label indicating mutagenicity
+
+The task is **graph-level classification**: the model must predict **one label per entire graph**.  
+Small structural changes can significantly affect chemical properties, making **structural expressiveness critical**.
+
+---
+
+### Cora
+Cora is a **single large citation graph**, where:
+- Nodes represent academic papers
+- Edges represent citation links
+- Node features are sparse bag-of-words vectors
+- Each node belongs to a research topic
+
+The task is **node-level classification**: predict the label of each node using its features and neighborhood.  
+Because the graph is large and fixed, **scalability and efficient message passing** are essential.
+
+---
+
+## 🧪 Graph-Level Classification on MUTAG — GIN
+
+### Model
+```python
+pyg_nn.GINConv(
+    nn.Sequential(
+        nn.Linear(hidden_dim, hidden_dim),
+        nn.ReLU(),
+        nn.Linear(hidden_dim, hidden_dim)
+    )
+)
+```
+
+
+
+
+
+
+
 
 # Projects:
 
