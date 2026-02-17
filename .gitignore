@@ -194,6 +194,8 @@ cython_debug/
 data/
 dataset/
 datasets/
+elliptic_bitcoin_dataset/
+
 
 # PyTorch Geometric / OGB
 processed/
@@ -203,3 +205,4 @@ raw/
 *.npz
 *.npy
 *.pkl
+*.zip
