@@ -315,3 +315,35 @@ Classical ML (XGBoost) can outperform GNNs when strong engineered features exist
 Graph models require careful calibration in temporal settings.
 
 Fraud detection systems must balance recall and precision via threshold tuning.
+
+
+📊 Model Ranking (Temporal Split + Weighted Loss + Threshold = 0.6)
+
+# 🏆 Ranking by Fraud F1-score (Primary Metric)
+
+| Rank | Model     | Accuracy | Fraud Recall | Fraud F1 |
+| ---- | --------- | -------- | ------------ | -------- |
+| 🥇 1 | XGBoost   | 0.91     | 0.7396       | 0.7462   |
+| 🥈 2 | GraphSAGE | 0.91     | 0.7128       | 0.4898   |
+| 🥉 3 | GCN       | 0.85     | 0.6297       | 0.4624   |
+| 4    | GAT       | 0.81     | 0.7378       | 0.3676   |
+
+
+# 🚨 Ranking by Fraud Recall (Fraud Detection Priority)
+
+| Rank | Model     | Fraud Recall | Fraud F1 | Accuracy |
+| ---- | --------- | ------------ | -------- | -------- |
+| 🥇 1 | XGBoost   | 0.7396       | 0.7462   | 0.91     |
+| 🥈 2 | GAT       | 0.7378       | 0.3676   | 0.81     |
+| 🥉 3 | GraphSAGE | 0.7128       | 0.4898   | 0.91     |
+| 4    | GCN       | 0.6297       | 0.4624   | 0.85     |
+
+# 📌 Interpretation
+
+XGBoost achieves the best balance between precision and recall.
+
+GraphSAGE is the strongest GNN model.
+
+GAT achieves high recall but suffers from low precision.
+
+GCN provides stable but moderate performance.
