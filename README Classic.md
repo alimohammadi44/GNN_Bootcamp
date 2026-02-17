@@ -1,14 +1,15 @@
-# GNN Bootcamp
+# GNN Bootcamp — From Nodes to Graphs
 
-This repository contains hands-on implementations of **Graph Neural Networks (GNNs)** using **PyTorch Geometric (PyG)**.
-It is designed for learning, experimentation, and teaching core GNN concepts through well-known benchmark datasets.
+This repository is a **hands-on Graph Neural Networks (GNN) bootcamp** that demonstrates how **task type and dataset structure determine the choice of GNN architecture**.
+It is designed for learning, experimentation, and teaching core GNN concepts through well-known benchmark datasets using **PyTorch Geometric (PyG)**.
 
-# GNN_Bootcamp
-Hands-on bootcamp materials for Graph Neural Networks (GNNs), including tutorials, exercises, and projects.
+The bootcamp focuses on two complementary problems in graph machine learning:
+- **Graph-level classification** on molecular graphs (MUTAG)
+- **Node-level classification** on citation networks (Cora)
 
-## Data
-Datasets are downloaded and processed automatically using PyTorch Geometric / OGB.
-Generated files are not tracked in the repository.
+Although both tasks rely on message passing, their **objectives, data characteristics, and modeling requirements are fundamentally different**, motivating different GNN designs.
+
+---
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
 (https://colab.research.google.com/github/alimohammadi44/GNN_Bootcamp/blob/main/GCN_Cora.ipynb)
@@ -18,29 +19,37 @@ Generated files are not tracked in the repository.
 
 
 
+## 📊 Dataset Nature
+Datasets are downloaded and processed automatically using PyTorch Geometric / OGB.
+Generated files are not tracked in the repository.
 
-The project focuses on two complementary tasks:
-- **Node-level classification** on citation networks
-- **Graph-level classification** on molecular graphs
+### MUTAG
+MUTAG consists of **many small molecular graphs**, where:
+- Each graph represents a chemical compound
+- Nodes correspond to atoms and edges to chemical bonds
+- Each graph has a single label indicating mutagenicity
+
+The task is **graph-level classification**: the model must predict **one label per entire graph**.  
+Small structural changes can significantly affect chemical properties, making **structural expressiveness critical**.
 
 ---
 
-## 📁 Contents
+### Cora
+Cora is a **single large citation graph**, where:
+- Nodes represent academic papers
+- Edges represent citation links
+- Node features are sparse bag-of-words vectors
+- Each node belongs to a research topic
 
-- `GCN_Cora.py` / `GCN_Cora.ipynb`  
-  Graph Convolutional Network (GCN) and Graph Attention Network (GAT) models for node classification on the Cora dataset.
-=======
-🔍 Model Comparison: MUTAG vs Cora
+The task is **node-level classification**: predict the label of each node using its features and neighborhood.  
+Because the graph is large and fixed, **scalability and efficient message passing** are essential.
 
-Although both experiments use Graph Neural Networks, the nature of the tasks and data is fundamentally different, which motivates different model choices.
+---
 
-🧪 MUTAG: Graph-Level Classification with GIN
+# 🧪 Graph-Level Classification on MUTAG — GIN
 
-For the MUTAG dataset, the task is graph-level classification:
-each input graph represents an entire molecule, and the model must predict a single label for the whole graph.
-
-To handle this, the following model is used:
-
+### Model
+```python
 pyg_nn.GINConv(
     nn.Sequential(
         nn.Linear(hidden_dim, hidden_dim),
@@ -48,185 +57,118 @@ pyg_nn.GINConv(
         nn.Linear(hidden_dim, hidden_dim)
     )
 )
+```
 
 Why GIN?
 
-Graph Isomorphism Network (GIN) is designed to be maximally expressive
+The Graph Isomorphism Network (GIN) is designed to be maximally expressive among message-passing GNNs.
+It has been shown to be as powerful as the Weisfeiler–Lehman (WL) graph isomorphism test, meaning it can distinguish graph structures that simpler GNNs cannot.
 
-It has been shown to be as powerful as the Weisfeiler–Lehman (WL) graph isomorphism test
+This property is especially important for molecular graphs, where small changes in structure (e.g., functional groups or bond patterns) can significantly affect chemical behavior.
 
-This is crucial for molecular graphs, where small structural differences can change chemical properties
+For MUTAG, the model must:
 
-Why MUTAG is more complex
+Learn informative node embeddings
 
-Each sample is a separate graph
+Aggregate them via global pooling
 
-Graph sizes vary
+Produce a single embedding representing the entire molecule
 
-The model must:
+Pros and Cons of GIN (MUTAG)
 
-Learn node representations
+## Pros
 
-Aggregate them using global pooling
+✅ Very strong structural expressiveness
 
-Produce a single graph embedding
+✅ Captures subtle graph differences
 
-Pros of GIN (MUTAG)
+✅ Well-suited for molecular and chemical data
 
-✅ Very expressive
-✅ Strong at capturing subtle structural differences
-✅ Well-suited for molecular data
+## Cons
 
-Cons of GIN
+❌ More parameters than simpler GNNs
 
-❌ More parameters
 ❌ Higher risk of overfitting on small datasets
+
 ❌ Computationally heavier
 
-📚 Cora: Node-Level Classification with GCN and GAT
-
-For Cora, the task is node classification on a single large graph.
-Each node (paper) must be classified, not the entire graph.
-
-Two architectures are explored.
-
-🟦 GCN on Cora
+# 📚 Node-Level Classification on Cora — GCN and GAT
+## Graph Convolutional Network (GCN)
+```python
 self.conv1 = GCNConv(dataset.num_features, hidden_channels)
 self.conv2 = GCNConv(hidden_channels, dataset.num_classes)
+```
 
-
-Graph Convolutional Networks (GCN) perform neighborhood averaging with normalized adjacency.
+GCN performs normalized neighborhood averaging, treating all neighbors equally.
 
 Pros
 
-Simple and efficient
+✅ Simple and efficient
 
-Strong baseline for citation networks
+✅ Strong baseline for citation networks
 
-Easy to train
+✅ Easy to train
 
 Cons
 
-Uniformly weights neighbors
+❌ Uniform neighbor weighting
 
-Limited expressive power
+❌ Limited expressive power
 
-Can oversmooth with deeper layers
+❌ Oversmoothing with deeper layers
 
-🟨 GAT on Cora
+## Graph Attention Network (GAT)
+```python
 self.conv1 = GATConv(dataset.num_features, hidden_channels, heads)
 self.conv2 = GATConv(heads * hidden_channels, dataset.num_classes, heads)
+```
 
+GAT introduces attention mechanisms that learn which neighbors are more important.
 
-Graph Attention Networks (GAT) introduce attention weights to learn which neighbors matter more.
+## Pros
 
-Pros
+✅ Learns adaptive neighbor importance
 
-Learns adaptive neighbor importance
+✅ More expressive than GCN
 
-More expressive than GCN
+✅ Often improves performance on heterophilic graphs
 
-Often improves performance on heterophilic graphs
+## Cons
 
-Cons
+❌ More computationally expensive
 
-More computationally expensive
+❌ Additional hyperparameters (attention heads)
 
-More hyperparameters (heads, attention)
+❌ Slower on large graphs
 
-Slower on large graphs
-
-🧠 Key Differences (Summary)
+## 🔍 MUTAG vs Cora — Key Differences
 Aspect	MUTAG (GIN)	Cora (GCN / GAT)
-Task	Graph-level classification	Node-level classification
+Task type	Graph-level	Node-level
 Input	Many small graphs	One large graph
+Dataset nature	Molecular structures	Citation network
 Model focus	Structural expressiveness	Efficient message passing
-Architecture	MLP-based aggregation	Linear + neighborhood aggregation
-Complexity	Higher	Lower
-Risk	Overfitting	Oversmoothing (GCN)
-🎯 Takeaway
+Main risk	Overfitting	Oversmoothing (GCN)
+## 🧠 Key Takeaways
 
-MUTAG requires a more expressive model because it must distinguish between entire graphs with subtle structural differences → GIN is ideal
+Graph-level classification requires highly expressive models → GIN
 
-Cora focuses on scalable node classification, where simpler architectures like GCN and GAT are sufficient and more efficient
+Node-level classification benefits from scalable architectures → GCN / GAT
 
-Using multiple models on Cora highlights the trade-off between simplicity (GCN) and expressiveness (GAT)
+GAT trades efficiency for expressiveness compared to GCN
 
-Together, these experiments demonstrate how task type and data structure drive GNN architecture design.
+GNN architecture should be chosen based on task and dataset characteristics, not popularity
 
-
->>>>>>> ce795850bb6ffc7d8c10ff003a7202093ae47c87
-
-- `GNN_MUTAG.py` / `GNN_MUTAG.ipynb`  
-  Graph Isomorphism Network (GIN) model for graph-level classification on the MUTAG dataset.
-
----
-
-## 📌 GCN_Cora: Node Classification on Citation Networks
-
-The **Cora** dataset is a standard benchmark in graph machine learning.
-Nodes represent academic papers, edges represent citation links, and each node has a bag-of-words feature vector.
-
-### Models Used
-
-#### Graph Convolutional Network (GCN)
-
+🚀 Running the Code
 ```python
-self.conv1 = GCNConv(dataset.num_features, hidden_channels)
-self.conv2 = GCNConv(hidden_channels, dataset.num_classes)
-```
-
-#### Graph Attention Network (GAT)
-
-```python
-self.conv1 = GATConv(dataset.num_features, hidden_channels, heads)
-self.conv2 = GATConv(heads * hidden_channels, dataset.num_classes, heads)
-```
-
----
-
-## 📌 GNN_MUTAG: Graph-Level Classification on Molecular Data
-
-The **MUTAG** dataset consists of small molecular graphs.
-Each graph represents a chemical compound, where nodes are atoms and edges are chemical bonds.
-
-### Model Used: Graph Isomorphism Network (GIN)
-
-```python
-pyg_nn.GINConv(
-    nn.Sequential(
-        nn.Linear(hidden_dim, hidden_dim),
-        nn.ReLU(),
-        nn.Linear(hidden_dim, hidden_dim)
-    )
-)
-```
-
----
-
-## 🔍 Model Comparison: MUTAG vs Cora
-
-| Aspect | MUTAG (GIN) | Cora (GCN / GAT) |
-|------|------------|----------------|
-| Task Type | Graph-level | Node-level |
-| Input | Many small graphs | One large graph |
-| Complexity | Higher | Lower |
-| Focus | Structural expressiveness | Efficient message passing |
-
----
-
-## 🚀 Running the Code
-
-```bash
 pip install torch torch-geometric
 python GCN_Cora.py
 python GNN_MUTAG.py
 ```
 
----
+# 📜 References
 
-## 📜 References
+- Kipf & Welling — Semi-Supervised Classification with Graph Convolutional Networks (https://arxiv.org/abs/1609.02907)
 
-- Kipf & Welling, *Semi-Supervised Classification with Graph Convolutional Networks*
-- Veličković et al., *Graph Attention Networks*
-- Xu et al., *How Powerful Are Graph Neural Networks?*
+- Veličković et al. — Graph Attention Networks (https://arxiv.org/abs/1710.10903)
+
+- Xu et al. — How Powerful Are Graph Neural Networks? (https://arxiv.org/abs/1810.00826)
